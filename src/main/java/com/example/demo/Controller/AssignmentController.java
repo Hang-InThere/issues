@@ -3,6 +3,7 @@ package com.example.demo.Controller;
 import com.example.demo.Entity.Assignment;
 import com.example.demo.Entity.Dept;
 import com.example.demo.Entity.Emp;
+import com.example.demo.Entity.Schedule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Collection;
@@ -38,6 +40,21 @@ public class AssignmentController {
         System.out.println("****************************************************************");
         model.addAttribute("assignments",assignments);
         return "search";
+    }
+    @PostMapping("/apply")
+    public String apply(Assignment assignment,Model model){
+        try {
+            String sql = "insert into schedule values(?,?,?,?)";
+            Object[] args = {assignment.getId(),assignment.getName(),assignment.getStartTime(),assignment.getDeadLine()};
+            jdbcTemplate.update(sql,args);
+            return"redirect:/sche";
+
+        }catch (Exception e){
+            model.addAttribute("assignments",assignment);
+            model.addAttribute("msg","已申请");
+            return "search";
+        }
+
     }
 
 }

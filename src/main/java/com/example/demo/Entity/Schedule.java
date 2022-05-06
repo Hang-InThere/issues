@@ -12,6 +12,6 @@ import org.springframework.stereotype.Component;
 public class Schedule {
     private String startTime;
     private String deadLine;
-    private Integer assignId;
-    private String assignname;
+    private Integer id;
+    private String name;
 }

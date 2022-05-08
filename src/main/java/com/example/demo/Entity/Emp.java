@@ -13,9 +13,7 @@ public class Emp {
     private Integer id;
     private String name;
     private Integer sex;
-    private String birth;
+    private String profession;
     private String phone;
-    private String deptId;
-    private String idcard;
-    private String deptName;
+    private String resume;
 }

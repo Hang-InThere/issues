@@ -105,11 +105,9 @@
 									<th>id</th>
 									<th>name</th>
 									<th>gender</th>
-									<th>birth</th>
 									<th>phone</th>
-									<th>deptId</th>
-									<th>idcard</th>
-									<th>deptName</th>
+									<th>profession</th>
+									<th>resume</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -117,11 +115,9 @@
 									<td th:text="${emp.getId()}"></td>
 									<td th:text="${emp.getName()}"></td>
 									<td th:text="${emp.getSex()==0?'女':'男'}"></td>
-									<td th:text="${#dates.format(emp.getBirth(),'yyyy-MM-dd HH:mm:ss')}"></td>
 									<td th:text="${emp.getPhone()}"></td>
-									<td th:text="${emp.getDeptId()}"></td>
-									<td th:text="${emp.getIdcard()}"></td>
-									<td th:text="${emp.getDeptName()}"></td>
+									<td th:text="${emp.getProfession()}"></td>
+									<td th:text="${emp.getResume()}"></td>
 
 									<td>
 										<a class="btn btn-sm btn-primary" th:href="@{/emp/}+${emp.getId()}">编辑</a>

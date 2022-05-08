@@ -102,20 +102,26 @@
 							<thead>
 								<tr>
 									<th>Id</th>
-									<th>DeptName</th>
-									<th>Manager</th>
-
+									<th>AssignmentName</th>
+									<th>StartTime</th>
+									<th>DeadLine</th>
+									<th>Money</th>
+									<th>Resume</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr th:each="dep:${deps}">
-									<td th:text="${dep.getId()}"></td>
-									<td th:text="${dep.getDeptName()}"></td>
-									<td th:text="${dep.getManager()}"></td>
+								<tr th:each="assignment:${assignments}">
+									<td th:text="${assignment.getId()}"></td>
+									<td th:text="${assignment.getName()}"></td>
+									<td th:text="${#dates.format(assignment.getStartTime(),'yyyy-MM-dd HH:mm:ss')}"></td>
+									<td th:text="${#dates.format(assignment.getDeadLine(),'yyyy-MM-dd HH:mm:ss')}"></td>
+									<td th:text="${assignment.getMoney()}"></td>
+									<td th:text="${assignment.getResume()}"></td>
+
 
 									<td>
-										<a class="btn btn-sm btn-primary" th:href="@{/dep/}+${dep.getId()}">编辑</a>
-										<a class="btn btn-sm btn-danger" th:href="@{/delete/}+${dep.getId()}">删除</a>
+										<a class="btn btn-sm btn-primary" th:href="@{/dep/}+${assignment.getId()}">编辑</a>
+										<a class="btn btn-sm btn-danger" th:href="@{/delete/}+${assignment.getId()}">删除</a>
 									</td>
 								</tr>
 							</tbody>

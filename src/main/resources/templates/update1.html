@@ -64,7 +64,7 @@
 
 							<li class="nav-item">
 								<a class="nav-link" th:href="@{/depts}">
-									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart">
+									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart">
 										<circle cx="9" cy="21" r="1"></circle>
 										<circle cx="20" cy="21" r="1"></circle>
 										<path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
@@ -72,9 +72,9 @@
 									Department
 								</a>
 							</li>
-							<li class="nav-item" >
+							<li class="nav-item">
 								<a class="nav-link" th:href="@{/emps}">
-									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users">
+									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users">
 										<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
 										<circle cx="9" cy="7" r="4"></circle>
 										<path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
@@ -98,17 +98,32 @@
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 					<form th:action="@{/updateDept}" method="post">
 						<div class="form-group">
-							<label>DepartmentId(不可被修改)</label>
-							<input th:value="${depts.getId()}" type="text" name="id" class="form-control" placeholder="">
+							<label>AssignmentId(不可被修改)</label>
+							<input th:value="${assignment.getId()}" type="text" name="id" class="form-control" placeholder="">
 						</div>
 						<div class="form-group">
 							<label>DepartmentName</label>
-							<input th:value="${depts.getDeptName()}" type="text" name="deptName" class="form-control" placeholder="">
+							<input th:value="${assignment.getName()}" type="text" name="name" class="form-control" placeholder="">
 						</div>
 
 						<div class="form-group">
-							<label>Manager</label>
-							<input th:value="${depts.getManager()}" type="text" name="manager" class="form-control" placeholder="">
+							<label>StartTime</label>
+							<input th:value="${assignment.getStartTime()}" type="text" name="startTime" class="form-control" placeholder="">
+
+						</div>
+						<div class="form-group">
+							<label>DeadLine</label>
+							<input th:value="${assignment.getDeadLine()}" type="text" name="deadLine" class="form-control" placeholder="">
+
+						</div>
+						<div class="form-group">
+							<label>Money</label>
+							<input th:value="${assignment.getMoney()}" type="text" name="money" class="form-control" placeholder="">
+
+						</div>
+						<div class="form-group">
+							<label>StartTime</label>
+							<input th:value="${assignment.getResume()}" type="text" name="resume" class="form-control" placeholder="">
 							<button class="btn btn-primary">修改</button>
 						</div>
 

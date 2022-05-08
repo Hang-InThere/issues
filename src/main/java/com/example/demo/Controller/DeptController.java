@@ -1,6 +1,7 @@
 package com.example.demo.Controller;
 
 
+import com.example.demo.Entity.Assignment;
 import com.example.demo.Entity.Dept;
 import com.example.demo.Entity.Emp;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +22,15 @@ public class DeptController {
     JdbcTemplate jdbcTemplate;
     @RequestMapping("/depts")
     public String list(Model model){
-        String sql = "select* from dept";
-        Collection<Dept> deps = jdbcTemplate.query(sql, new BeanPropertyRowMapper<Dept>(Dept.class));
+        String sql = "select* from assignment";
+        Collection<Assignment> assignments = jdbcTemplate.query(sql, new BeanPropertyRowMapper<Assignment>(Assignment.class));
+        for(Assignment a :assignments){
+            System.out.println(a.getId());
+            System.out.println(a.getName());
+            System.out.println(a.getMoney());
+        }
 
-        model.addAttribute("deps",deps);
+        model.addAttribute("assignments",assignments);
         return "list2";
     }
 
@@ -34,37 +40,36 @@ public class DeptController {
         return"add1";
     }
     @PostMapping("/dept")
-    public String addDep(Dept dept){
-        String sql="insert into dept values(?,?,?)";
-        Object[] args = {dept.getId(),dept.getDeptName(),dept.getManager()};
+    public String addDep(Assignment assignment){
+        String sql="insert into dept values(?,?,?,?,?,?)";
+        Object[] args = {assignment.getId(),assignment.getName(),assignment.getStartTime(),assignment.getDeadLine(),
+            assignment.getMoney(),assignment.getResume()};
         jdbcTemplate.update(sql,args);
         return"redirect:/depts";
     }
     @GetMapping("/dep/{id}")
     public String toUpdatepage(@PathVariable("id")Integer id,Model model){
-        String sql = "select* from dept where id="+id;
-        Dept dept =  jdbcTemplate.queryForObject(sql,new BeanPropertyRowMapper<Dept>(Dept.class));
-        model.addAttribute("depts",dept);
+        String sql = "select* from assignment where id="+id;
+        Assignment assignment =  jdbcTemplate.queryForObject(sql,new BeanPropertyRowMapper<Assignment>(Assignment.class));
+        model.addAttribute("assignment",assignment);
         return "update1";
 
     }
     @PostMapping("/updateDept")
-    public String updateDept(Dept dept){
-        String sql = "update dept set deptName=?,manager=? where id=?";
-        Object[] args = {dept.getDeptName(),dept.getManager(),dept.getId()};
+    public String updateDept(Assignment assignment){
+        String sql = "update assignment set name=?,startTime=?,deadLine=?,money=?,resume=? where id=?";
+        Object[] args = {assignment.getName(),assignment.getStartTime(),assignment.getDeadLine(),assignment.getMoney(),assignment.getResume(),assignment.getId()};
         jdbcTemplate.update(sql,args);
         return"redirect:/depts";
 
     }
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id")Integer id){
-        String sql = "delete from dept where id="+id;
-        String sql1 = "select * from emp where deptId="+"'"+id+"'";
+        String sql = "delete from assignment where id="+id;
+
 
         jdbcTemplate.update(sql);
-        Emp emp = jdbcTemplate.queryForObject(sql1, new BeanPropertyRowMapper<Emp>(Emp.class));
-        String sql2 = "update emp set deptId=null,deptName=null where id="+"'"+emp.getId()+"'";
-        jdbcTemplate.update(sql2);
+
         return"redirect:/depts";
     }
 }

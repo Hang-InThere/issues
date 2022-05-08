@@ -39,8 +39,8 @@ public class EmployeeController {
     public String addEmp(Emp employee){
         System.out.println("===================================");
         String sql = "insert into emp values(?,?,?,?,?,?,?,?)";
-        Object[] args = {employee.getId(),employee.getName(),employee.getSex(),employee.getBirth(),employee.getPhone(),
-                            employee.getDeptId(),employee.getIdcard(),employee.getDeptName()};
+        Object[] args = {employee.getId(),employee.getName(),employee.getSex(),employee.getPhone(),
+                           employee.getProfession(),employee.getResume()};
         jdbcTemplate.update(sql,args);
 
         return"redirect:/emps";
@@ -55,9 +55,9 @@ public class EmployeeController {
     }
     @PostMapping("/updateEmp")
     public String UpdateEmp(Emp employee){
-        String sql = "update emp set name=?,sex=?,birth=?,phone=?,deptId=?,idcard=?,deptName=? where id=?";
-        Object[] args = {employee.getName(),employee.getSex(),employee.getBirth(),employee.getPhone(),
-                employee.getDeptId(),employee.getIdcard(),employee.getDeptName(),employee.getId()};
+        String sql = "update emp set name=?,sex=?,phone=?,profession=?,resume=? where id=?";
+        Object[] args = {employee.getName(),employee.getSex(),employee.getPhone(),
+                employee.getProfession(),employee.getResume(),employee.getId()};
         jdbcTemplate.update(sql,args);
         return "redirect:/emps";
     }

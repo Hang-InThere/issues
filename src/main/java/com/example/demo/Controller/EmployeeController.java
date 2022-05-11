@@ -38,7 +38,7 @@ public class EmployeeController {
     @PostMapping ("/emp")
     public String addEmp(Emp employee){
         System.out.println("===================================");
-        String sql = "insert into emp values(?,?,?,?,?,?,?,?)";
+        String sql = "insert into emp values(?,?,?,?,?,?)";
         Object[] args = {employee.getId(),employee.getName(),employee.getSex(),employee.getPhone(),
                            employee.getProfession(),employee.getResume()};
         jdbcTemplate.update(sql,args);

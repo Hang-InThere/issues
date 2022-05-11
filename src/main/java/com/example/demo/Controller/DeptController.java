@@ -41,7 +41,7 @@ public class DeptController {
     }
     @PostMapping("/dept")
     public String addDep(Assignment assignment){
-        String sql="insert into dept values(?,?,?,?,?,?)";
+        String sql="insert into assignment values(?,?,?,?,?,?)";
         Object[] args = {assignment.getId(),assignment.getName(),assignment.getStartTime(),assignment.getDeadLine(),
             assignment.getMoney(),assignment.getResume()};
         jdbcTemplate.update(sql,args);

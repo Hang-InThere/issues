@@ -9,10 +9,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
@@ -24,11 +21,7 @@ public class DeptController {
     public String list(Model model){
         String sql = "select* from assignment";
         Collection<Assignment> assignments = jdbcTemplate.query(sql, new BeanPropertyRowMapper<Assignment>(Assignment.class));
-        for(Assignment a :assignments){
-            System.out.println(a.getId());
-            System.out.println(a.getName());
-            System.out.println(a.getMoney());
-        }
+
 
         model.addAttribute("assignments",assignments);
         return "list2";
@@ -71,5 +64,15 @@ public class DeptController {
         jdbcTemplate.update(sql);
 
         return"redirect:/depts";
+    }
+    @PostMapping("/search1")
+    public String Search(@RequestParam("msg") String msg,Model model){
+        String sql = "select* from assignment where id like '%"+msg+"%'or name like '%"
+                +msg+"%'or startTime like'%"+msg+"%'or deadLine like'%"+msg+"%'or money like'%"+msg+"%'or resume like '%"+msg+"%'";
+        Collection<Assignment> assignments = jdbcTemplate.query(sql, new BeanPropertyRowMapper<Assignment>(Assignment.class));
+
+
+        model.addAttribute("assignments",assignments);
+        return "list2";
     }
 }

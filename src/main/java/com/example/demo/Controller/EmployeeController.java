@@ -7,10 +7,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
@@ -67,5 +64,13 @@ public class EmployeeController {
         jdbcTemplate.update(sql);
         return "redirect:/emps";
 
+    }
+    @PostMapping("/search")
+    public String Search(@RequestParam("msg") String msg  , Model model){
+        String sql = "select* from emp where id like '%"+msg+"%'or name like '%"+msg+"%'or sex like'%"+msg+"%'or phone like'%"+msg+"%'or profession like'%"+msg+"%'or resume like '%"+msg+"%'";
+        Collection<Emp> emps = jdbcTemplate.query(sql, new BeanPropertyRowMapper<Emp>(Emp.class));
+
+        model.addAttribute("emps",emps);
+        return "list";
     }
 }

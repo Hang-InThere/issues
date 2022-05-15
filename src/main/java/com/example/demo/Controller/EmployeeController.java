@@ -43,7 +43,7 @@ public class EmployeeController {
         return"redirect:/emps";
     }
     @GetMapping("/emp/{id}")
-    public String toUpdateEmp(@PathVariable("id")Integer id, Model model){
+    public String toUpdateEmp(@PathVariable("id")String id, Model model){
 
         String sql = "select* from emp where id="+id;
         Emp emps =  jdbcTemplate.queryForObject(sql,new BeanPropertyRowMapper<Emp>(Emp.class));
@@ -59,7 +59,7 @@ public class EmployeeController {
         return "redirect:/emps";
     }
     @GetMapping("/delemp/{id}")
-    public String DeleteEmp(@PathVariable("id")Integer id){
+    public String DeleteEmp(@PathVariable("id")String id){
         String sql = "delete from emp where id="+id;
         jdbcTemplate.update(sql);
         return "redirect:/emps";

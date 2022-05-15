@@ -19,7 +19,7 @@ public class DeptController {
     JdbcTemplate jdbcTemplate;
     @RequestMapping("/depts")
     public String list(Model model){
-        String sql = "select* from assignment";
+        String sql = "select* from assignment where eid is null";
         Collection<Assignment> assignments = jdbcTemplate.query(sql, new BeanPropertyRowMapper<Assignment>(Assignment.class));
 
 
@@ -41,7 +41,7 @@ public class DeptController {
         return"redirect:/depts";
     }
     @GetMapping("/dep/{id}")
-    public String toUpdatepage(@PathVariable("id")Integer id,Model model){
+    public String toUpdatepage(@PathVariable("id")String id,Model model){
         String sql = "select* from assignment where id="+id;
         Assignment assignment =  jdbcTemplate.queryForObject(sql,new BeanPropertyRowMapper<Assignment>(Assignment.class));
         model.addAttribute("assignment",assignment);
@@ -57,7 +57,7 @@ public class DeptController {
 
     }
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable("id")Integer id){
+    public String delete(@PathVariable("id")String id){
         String sql = "delete from assignment where id="+id;
 
 
@@ -67,8 +67,8 @@ public class DeptController {
     }
     @PostMapping("/search1")
     public String Search(@RequestParam("msg") String msg,Model model){
-        String sql = "select* from assignment where id like '%"+msg+"%'or name like '%"
-                +msg+"%'or startTime like'%"+msg+"%'or deadLine like'%"+msg+"%'or money like'%"+msg+"%'or resume like '%"+msg+"%'";
+        String sql = "select* from assignment where eid is null and (id like '%"+msg+"%'or name like '%"
+                +msg+"%'or startTime like'%"+msg+"%'or deadLine like'%"+msg+"%'or money like'%"+msg+"%'or resume like '%"+msg+"%')";
         Collection<Assignment> assignments = jdbcTemplate.query(sql, new BeanPropertyRowMapper<Assignment>(Assignment.class));
 
 

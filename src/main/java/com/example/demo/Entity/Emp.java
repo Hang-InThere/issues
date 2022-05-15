@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 @Component
 public class Emp {
-    private Integer id;
+    private String id;
     private String name;
     private Integer sex;
     private String profession;

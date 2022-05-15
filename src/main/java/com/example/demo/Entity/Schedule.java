@@ -10,8 +10,11 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 @Data
 public class Schedule {
+    private String euserid;
     private String startTime;
     private String deadLine;
     private Integer id;
     private String name;
+    private String state;
+    private String ename;
 }

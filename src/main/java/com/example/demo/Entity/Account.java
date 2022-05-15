@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 @Component
 public class Account {
+    private String eid;
     private String account;
     private String password;
     /*

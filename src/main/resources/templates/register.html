@@ -20,13 +20,15 @@
 			<p style="color: red" th:text="${msg1}" ></p>
 			<label class="sr-only">Username</label>
 			<input type="text" name = "username"class="form-control" placeholder="Username" required="" autofocus="">
+			<label class="sr-only">EmployeeId</label>
+			<input type="text" name = "eid"class="form-control" placeholder="employeeId" required="" autofocus="">
 			<label class="sr-only" >Password</label>
 			<input type="password" name = "password"class="form-control" placeholder="Password" required="">
 			<label class="sr-only" >Please repeat</label>
 			<input type="password" name = "repassword"class="form-control" placeholder="Please repeat password" required="">
 			<label class="sr-only" >Identity</label>
 			<input type="radio"name="identity" id="1" value="1" checked>自由职业者
-			<input type="radio" name="identity" id="0" value="0">员工
+
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
 			<p class="mt-5 mb-3 text-muted">© 2017-2018</p>
 			<a class="btn btn-sm">中文</a>

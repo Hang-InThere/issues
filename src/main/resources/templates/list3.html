@@ -74,6 +74,12 @@
 									Schedule
 								</a>
 							</li>
+							<li class="nav-item" >
+								<a class="nav-link" th:href="@{/his}">
+
+									History
+								</a>
+							</li>
 
 
 						</ul>
@@ -88,7 +94,7 @@
 				</nav>
 
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-					<h2><a class="btn btn-sm btn-success" th:href="@{/emp}">添加员工</a></h2>
+
 					<h2><form th:action="@{/search2}" method="post">
 						<div class="form-group">
 							<input type="text" name="msg" class="form-control" placeholder="请输入查询信息">

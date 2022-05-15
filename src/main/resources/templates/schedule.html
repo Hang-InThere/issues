@@ -74,7 +74,12 @@
 									Schedule
 								</a>
 							</li>
+							<li class="nav-item" >
+								<a class="nav-link" th:href="@{/his}">
 
+									History
+								</a>
+							</li>
 
 						</ul>
 
@@ -104,6 +109,7 @@
 									<th>name</th>
 									<th>startTime</th>
 									<th>deadLine</th>
+									<th>state</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -112,8 +118,11 @@
 									<td th:text="${schedule.getName()}"></td>
 									<td th:text="${#dates.format(schedule.getStartTime(),'yyyy-MM-dd HH:mm:ss')}"></td>
 									<td th:text="${#dates.format(schedule.getDeadLine(),'yyyy-MM-dd HH:mm:ss')}"></td>
-
-
+									<td th:text="${schedule.getState()}"></td>
+									<td>
+									<a class="btn btn-sm btn-primary" th:href="@{/start/}+${schedule.getId()}">开始</a>
+									<a class="btn btn-sm btn-danger" th:href="@{/finish/}+${schedule.getId()}">完成</a>
+									</td>
 								</tr>
 
 							</tbody>

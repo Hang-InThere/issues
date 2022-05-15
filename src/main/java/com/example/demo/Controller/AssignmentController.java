@@ -18,16 +18,18 @@ public class AssignmentController {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    @RequestMapping("/assigns")
-    public String list(Model model){
+   @RequestMapping("/assigns")
+    public String list( Model model){
 
-        String sql = "select* from assignment";
+        String sql = "select* from assignment where eid is null";
         Collection<Assignment> assignments = jdbcTemplate.query(sql, new BeanPropertyRowMapper<Assignment>(Assignment.class));
+      ;
         model.addAttribute("assignments",assignments);
+
         return "list3";
     }
     @GetMapping("/assign/{id}")
-    public String toSearchpage(@PathVariable("id")Integer id, Model model){
+    public String toSearchpage(@PathVariable("id")String id, Model model){
 
         String sql = "select* from assignment where id="+id;
         Assignment assignments =  jdbcTemplate.queryForObject(sql,new BeanPropertyRowMapper<Assignment>(Assignment.class));
@@ -37,12 +39,19 @@ public class AssignmentController {
     @PostMapping("/apply")
     public String apply(Assignment assignment,Model model){
         try {
-            String sql = "insert into schedule values(?,?,?,?)";
-            Object[] args = {assignment.getId(),assignment.getName(),assignment.getStartTime(),assignment.getDeadLine()};
+            String sql = "insert into schedule values(?,?,?,?,?,?)";
+            String sql2 = "update assignment set eid = '"+LoginController.id+"' where id ='"+assignment.getId()+"'";
+            //String sql3 = "insert into doing(id,name,eid,ename) select assignment.id,assignment.name,eid,emp.name from emp,assignment where emp.id=eid;";
+            String state = "待开始";
+
+            Object[] args = {assignment.getId(),assignment.getName(),assignment.getStartTime(),assignment.getDeadLine(),LoginController.id,state};
             jdbcTemplate.update(sql,args);
+            jdbcTemplate.update(sql2);
+
             return"redirect:/sche";
 
         }catch (Exception e){
+            e.printStackTrace();
             model.addAttribute("assignments",assignment);
             model.addAttribute("msg","已申请");
             return "search";
@@ -51,8 +60,8 @@ public class AssignmentController {
     }
     @PostMapping("/search2")
     public String Search(@RequestParam("msg")String msg,Model model){
-        String sql = "select* from assignment where id like '%"+msg+"%'or name like '%"
-                +msg+"%'or startTime like'%"+msg+"%'or deadLine like'%"+msg+"%'or money like'%"+msg+"%'or resume like '%"+msg+"%'";
+        String sql = "select* from assignment where  eid is null and  (id like '%"+msg+"%'or name like '%"
+                +msg+"%'or startTime like'%"+msg+"%'or deadLine like'%"+msg+"%'or money like'%"+msg+"%'or resume like '%"+msg+"%') ";
         Collection<Assignment> assignments = jdbcTemplate.query(sql, new BeanPropertyRowMapper<Assignment>(Assignment.class));
         model.addAttribute("assignments",assignments);
         return "list3";

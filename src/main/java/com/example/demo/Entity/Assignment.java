@@ -11,10 +11,11 @@ import java.util.Date;
 @NoArgsConstructor
 @Component
 public class Assignment {
-    private Integer id;
+    private String id;
     private String name;
     private String startTime;
     private String deadLine;
     private Integer money;
     private String resume;
+    private Integer eid;
 }

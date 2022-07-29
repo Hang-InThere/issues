@@ -64,11 +64,10 @@
 
 							<li class="nav-item">
 								<a class="nav-link" th:href="@{/assigns}">
-
 									Assignment
 								</a>
 							</li>
-							<li class="nav-item" >
+							<li class="nav-item">
 								<a class="nav-link" th:href="@{/sche}">
 
 									Schedule
@@ -78,6 +77,12 @@
 								<a class="nav-link" th:href="@{/his}">
 
 									History
+								</a>
+							</li>
+							<li class="nav-item" >
+								<a class="nav-link" th:href="@{/mys}">
+
+									Myself
 								</a>
 							</li>
 
@@ -94,7 +99,7 @@
 				</nav>
 
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-
+					<h1>Assignment List</h1>
 					<h2><form th:action="@{/search2}" method="post">
 						<div class="form-group">
 							<input type="text" name="msg" class="form-control" placeholder="请输入查询信息">
@@ -106,20 +111,15 @@
 						<table class="table table-striped table-sm">
 							<thead>
 								<tr>
-									<th>id</th>
 									<th>name</th>
-									<th>startTime</th>
-									<th>deadLine</th>
 									<th>money</th>
 									<th>resume</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr th:each="assignment:${assignments}">
-									<td th:text="${assignment.getId()}"></td>
+
 									<td th:text="${assignment.getName()}"></td>
-									<td th:text="${#dates.format(assignment.getStartTime(),'yyyy-MM-dd HH:mm:ss')}"></td>
-									<td th:text="${#dates.format(assignment.getDeadLine(),'yyyy-MM-dd HH:mm:ss')}"></td>
 									<td th:text="${assignment.getMoney()}"></td>
 									<td th:text="${assignment.getResume()}"></td>
 

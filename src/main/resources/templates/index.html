@@ -16,11 +16,12 @@
 		<form class="form-signin" th:action="@{/user/login}">
 			<img class="mb-4" th:src="@{/static/img/bootstrap-solid.svg}" alt="" width="72" height="72">
 			<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-			<p style="color: red" th:text="${msg}" ></p>
+
 			<label class="sr-only">Username</label>
 			<input type="text" name = "username"class="form-control" placeholder="Username" required="" autofocus="">
 			<label class="sr-only" >Password</label>
 			<input type="password" name = "password"class="form-control" placeholder="Password" required="">
+			<p style="color: red" th:text="${msg}" ></p>
 			<label class="sr-only" >Identity</label>
 			<input type="radio"name="identity" id="1" value="1" checked>自由职业者
 			<input type="radio" name="identity" id="0" value="0">员工

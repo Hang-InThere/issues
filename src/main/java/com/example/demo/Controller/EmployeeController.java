@@ -1,7 +1,9 @@
 package com.example.demo.Controller;
 
+import ch.qos.logback.core.encoder.EchoEncoder;
 import com.example.demo.Entity.Emp;
 
+import com.example.demo.Entity.History;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -34,10 +36,9 @@ public class EmployeeController {
 
     @PostMapping ("/emp")
     public String addEmp(Emp employee){
-        System.out.println("===================================");
-        String sql = "insert into emp values(?,?,?,?,?,?)";
+        String sql = "insert into emp values(?,?,?,?,?,?,?,?)";
         Object[] args = {employee.getId(),employee.getName(),employee.getSex(),employee.getPhone(),
-                           employee.getProfession(),employee.getResume()};
+                           employee.getProfession(),employee.getResume(),employee.getBirthday(),employee.getBalance()};
         jdbcTemplate.update(sql,args);
 
         return"redirect:/emps";
@@ -67,10 +68,39 @@ public class EmployeeController {
     }
     @PostMapping("/search")
     public String Search(@RequestParam("msg") String msg  , Model model){
-        String sql = "select* from emp where id like '%"+msg+"%'or name like '%"+msg+"%'or sex like'%"+msg+"%'or phone like'%"+msg+"%'or profession like'%"+msg+"%'or resume like '%"+msg+"%'";
-        Collection<Emp> emps = jdbcTemplate.query(sql, new BeanPropertyRowMapper<Emp>(Emp.class));
+        if(msg.equals("女")){
+            String sql = "select* from emp where sex=0";
+            Collection<Emp> emps = jdbcTemplate.query(sql, new BeanPropertyRowMapper<Emp>(Emp.class));
+            model.addAttribute("emps",emps);
+        }else if(msg.equals("男")){
+            String sql = "select* from emp where sex=1";
+            Collection<Emp> emps = jdbcTemplate.query(sql, new BeanPropertyRowMapper<Emp>(Emp.class));
+            model.addAttribute("emps",emps);
+        }else{
+            String sql = "select* from emp where id like '%"+msg+"%'or name like '%"+msg+"%'or sex like'%"+msg+"%'or phone like'%"+msg+"%'or profession like'%"+msg+"%'or resume like '%"+msg+"%'";
+            Collection<Emp> emps = jdbcTemplate.query(sql, new BeanPropertyRowMapper<Emp>(Emp.class));
 
-        model.addAttribute("emps",emps);
+            model.addAttribute("emps",emps);
+        }
+
         return "list";
+    }
+    @GetMapping("/personal/{id}")
+    public String toPersoner(@PathVariable("id")String id,Model model,Model model2){
+
+        String sql = "select* from emp where id = "+id;
+        String sql1 = "select assignment.name,assignment.startTime,assignment.deadLine,money,state from schedule,assignment where assignment.id = schedule.id and euserid" +
+                "="+id+" and state = '已结算'";
+        Emp emps =  jdbcTemplate.queryForObject(sql,new BeanPropertyRowMapper<Emp>(Emp.class));
+        try {
+            Collection<History> history = jdbcTemplate.query(sql1,new BeanPropertyRowMapper<History>(History.class));
+            model.addAttribute("his",history);
+        }catch (Exception e){
+
+        }
+
+        model2.addAttribute("emps",emps);
+
+        return "personal";
     }
 }

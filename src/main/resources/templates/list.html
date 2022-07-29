@@ -94,6 +94,7 @@
 				</nav>
 
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+					<h1>Employee List</h1>
 					<h2><a class="btn btn-sm btn-success" th:href="@{/emp}">添加员工</a></h2>
 					<h2><form th:action="@{/search}" method="post">
 						<div class="form-group">
@@ -107,26 +108,21 @@
 						<table class="table table-striped table-sm">
 							<thead>
 								<tr>
-									<th>id</th>
 									<th>name</th>
 									<th>gender</th>
-									<th>phone</th>
 									<th>profession</th>
-									<th>resume</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr th:each="emp:${emps}">
-									<td th:text="${emp.getId()}"></td>
 									<td th:text="${emp.getName()}"></td>
 									<td th:text="${emp.getSex()==0?'女':'男'}"></td>
-									<td th:text="${emp.getPhone()}"></td>
 									<td th:text="${emp.getProfession()}"></td>
-									<td th:text="${emp.getResume()}"></td>
 
 									<td>
 										<a class="btn btn-sm btn-primary" th:href="@{/emp/}+${emp.getId()}">编辑</a>
 										<a class="btn btn-sm btn-danger" th:href="@{/delemp/}+${emp.getId()}">删除</a>
+										<a class="btn btn-sm btn-primary" th:href="@{/personal/}+${emp.getId()}">查看详情</a>
 									</td>
 								</tr>
 							</tbody>

@@ -17,7 +17,9 @@ import java.util.Collection;
 public class AssignmentController {
     @Autowired
     JdbcTemplate jdbcTemplate;
-
+    /*
+        展示所有任务
+     */
    @RequestMapping("/assigns")
     public String list( Model model){
 
@@ -28,6 +30,9 @@ public class AssignmentController {
 
         return "list3";
     }
+    /*
+        跳转到查看页面
+     */
     @GetMapping("/assign/{id}")
     public String toSearchpage(@PathVariable("id")String id, Model model){
 
@@ -36,6 +41,9 @@ public class AssignmentController {
         model.addAttribute("assignments",assignments);
         return "search";
     }
+    /*
+        申请任务
+     */
     @PostMapping("/apply")
     public String apply(Assignment assignment,Model model){
         try {
@@ -58,6 +66,9 @@ public class AssignmentController {
         }
 
     }
+    /*
+        查询
+     */
     @PostMapping("/search2")
     public String Search(@RequestParam("msg")String msg,Model model){
         String sql = "select* from assignment where  eid is null and  (id like '%"+msg+"%'or name like '%"

@@ -64,11 +64,10 @@
 
 							<li class="nav-item">
 								<a class="nav-link" th:href="@{/assigns}">
-
 									Assignment
 								</a>
 							</li>
-							<li class="nav-item" >
+							<li class="nav-item">
 								<a class="nav-link" th:href="@{/sche}">
 
 									Schedule
@@ -78,6 +77,12 @@
 								<a class="nav-link" th:href="@{/his}">
 
 									History
+								</a>
+							</li>
+							<li class="nav-item" >
+								<a class="nav-link" th:href="@{/mys}">
+
+									Myself
 								</a>
 							</li>
 
@@ -93,7 +98,7 @@
 				</nav>
 
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-
+					<h1>My Schedule</h1>
 					<h2><form th:action="@{/search3}" method="post">
 						<div class="form-group">
 							<input type="text" name="msg" class="form-control" placeholder="请输入查询信息">

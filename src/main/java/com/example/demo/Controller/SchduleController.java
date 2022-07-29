@@ -1,6 +1,7 @@
 package com.example.demo.Controller;
 
 import com.example.demo.Entity.Assignment;
+import com.example.demo.Entity.Emp;
 import com.example.demo.Entity.Schedule;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,6 +82,16 @@ public class SchduleController {
     }
     @GetMapping("/js/{id}")
     public String pay(@PathVariable("id")String id){
+        String sql1 = "select money from assignment where id = "+id;
+        Assignment assignment = jdbcTemplate.queryForObject(sql1,new BeanPropertyRowMapper<Assignment>(Assignment.class));
+        String sql0 = "select euserid from schedule where id = "+id;
+        Schedule schedule = jdbcTemplate.queryForObject(sql0,new BeanPropertyRowMapper<Schedule>(Schedule.class));
+        String eid = schedule.getEuserid();
+        String sql3 = "select balance from emp where id = "+eid;
+        Emp emp = jdbcTemplate.queryForObject(sql3,new BeanPropertyRowMapper<Emp>(Emp.class));
+        Integer money = assignment.getMoney()+emp.getBalance();
+        String sql4 = "update emp set balance ="+money+" where id ="+eid;
+        jdbcTemplate.update(sql4);
         String sql = "update schedule set state = '已结算' where id = "+id;
         jdbcTemplate.update(sql);
         return "redirect:/do";

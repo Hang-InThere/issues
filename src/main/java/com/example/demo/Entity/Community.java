@@ -5,20 +5,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Component
-public class Emp {
-    private String id;
-    private String name;
-    private Integer sex;
-    private String profession;
-    private String phone;
-    private String resume;
-    private String birthday;
-    private Integer balance;
+
+public class Community {
+    private Integer id;
+    private String ename;
     private String iconName;
+    private String text;
+    private String picture;
+    private String eid;
+    private String time;
 }

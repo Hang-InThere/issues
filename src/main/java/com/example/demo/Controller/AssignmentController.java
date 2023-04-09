@@ -10,7 +10,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Collection;
 
 @Controller
@@ -35,7 +34,6 @@ public class AssignmentController {
      */
     @GetMapping("/assign/{id}")
     public String toSearchpage(@PathVariable("id")String id, Model model){
-
         String sql = "select* from assignment where id="+id;
         Assignment assignments =  jdbcTemplate.queryForObject(sql,new BeanPropertyRowMapper<Assignment>(Assignment.class));
         model.addAttribute("assignments",assignments);
@@ -49,13 +47,10 @@ public class AssignmentController {
         try {
             String sql = "insert into schedule values(?,?,?,?,?,?)";
             String sql2 = "update assignment set eid = '"+LoginController.id+"' where id ='"+assignment.getId()+"'";
-            //String sql3 = "insert into doing(id,name,eid,ename) select assignment.id,assignment.name,eid,emp.name from emp,assignment where emp.id=eid;";
             String state = "待开始";
-
             Object[] args = {assignment.getId(),assignment.getName(),assignment.getStartTime(),assignment.getDeadLine(),LoginController.id,state};
             jdbcTemplate.update(sql,args);
             jdbcTemplate.update(sql2);
-
             return"redirect:/sche";
 
         }catch (Exception e){

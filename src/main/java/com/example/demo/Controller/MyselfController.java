@@ -21,15 +21,14 @@ public class MyselfController {
         String sql1 = "select assignment.name,assignment.startTime,assignment.deadLine,money,state from schedule,assignment where assignment.id = schedule.id and euserid" +
                 "="+LoginController.id+" and state = '已结算'";
         Emp emps =  jdbcTemplate.queryForObject(sql,new BeanPropertyRowMapper<Emp>(Emp.class));
+
         try {
             Collection<History> history = jdbcTemplate.query(sql1,new BeanPropertyRowMapper<History>(History.class));
             model.addAttribute("his",history);
         }catch (Exception e){
 
         }
-
         model2.addAttribute("emps",emps);
-
         return "mine";
     }
     @RequestMapping("/modify")

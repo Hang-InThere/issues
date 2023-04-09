@@ -21,7 +21,6 @@ public class SchduleController {
     public String list(Model model){
         String sql = "select* from schedule where (state = '待开始'or state = '执行中') and euserid = '"+LoginController.id+"'";
         Collection<Schedule> schedules = jdbcTemplate.query(sql, new BeanPropertyRowMapper<Schedule>(Schedule.class));
-
         model.addAttribute("schedules",schedules);
         return "schedule";
     }

@@ -18,4 +18,5 @@ public class Assignment {
     private Integer money;
     private String resume;
     private Integer eid;
+    private Integer fid;
 }

@@ -20,9 +20,6 @@ public class EmployeeController {
 
     @RequestMapping("/emps")
     public String list(Model model){
-
-
-
         String sql = "select* from emp";
         Collection<Emp> emps = jdbcTemplate.query(sql, new BeanPropertyRowMapper<Emp>(Emp.class));
         model.addAttribute("emps",emps);
@@ -40,7 +37,6 @@ public class EmployeeController {
         Object[] args = {employee.getId(),employee.getName(),employee.getSex(),employee.getPhone(),
                            employee.getProfession(),employee.getResume(),employee.getBirthday(),employee.getBalance()};
         jdbcTemplate.update(sql,args);
-
         return"redirect:/emps";
     }
     @GetMapping("/emp/{id}")
@@ -79,7 +75,6 @@ public class EmployeeController {
         }else{
             String sql = "select* from emp where id like '%"+msg+"%'or name like '%"+msg+"%'or sex like'%"+msg+"%'or phone like'%"+msg+"%'or profession like'%"+msg+"%'or resume like '%"+msg+"%'";
             Collection<Emp> emps = jdbcTemplate.query(sql, new BeanPropertyRowMapper<Emp>(Emp.class));
-
             model.addAttribute("emps",emps);
         }
 

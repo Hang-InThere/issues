@@ -95,7 +95,7 @@
 				</nav>
 
 				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-					<form th:action="@{/dept}" method="post">
+					<form th:action="@{/dept/{id}}" method="post">
 						<div class="form-group">
 							<label>AssignmentId</label>
 							<input type="text" name="id" class="form-control" placeholder="123">
@@ -116,12 +116,12 @@
 							<label>Money</label>
 							<input type="text" name="money" class="form-control" placeholder="任务金额">
 						</div>
+
 						<div class="form-group">
 							<label>Resume</label>
 							<input type="text" name="resume" class="form-control" placeholder="任务简介及要求">
 							<button class="btn btn-primary">发布</button>
 						</div>
-
 					</form>
 				</main>
 			</div>

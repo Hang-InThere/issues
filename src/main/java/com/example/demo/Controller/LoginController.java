@@ -31,11 +31,9 @@ public class LoginController {
         if(!StringUtils.isEmpty(username) && account.getPassword().equals(password)){
             if(account.getIdentity().equals(identity)){
                 if(identity == 0){
-
                     session.setAttribute("loginuser",username);
                     return "redirect:/main.html";
                 }else{
-
                     session.setAttribute("loginuser",username);
                     return "redirect:/freelancer.html";
                 }
@@ -70,7 +68,6 @@ public class LoginController {
         Collection<Emp> emp = jdbcTemplate.query(sql1,new BeanPropertyRowMapper<Emp>(Emp.class));
         tag = false;
         for(Emp e :emp){
-
             if(e.getId().equals(eid)){
                 tag = true;
             }
@@ -84,14 +81,10 @@ public class LoginController {
                     model.addAttribute("msg","注册成功");
                     return "redirect:/index.html";
                 }else {
-
                     model.addAttribute("msg","密码不一致");
                     return "register";
                 }
-
-
             }catch (Exception e){
-
                 model.addAttribute("msg1","用户名已存在");
                 return "register";
             }

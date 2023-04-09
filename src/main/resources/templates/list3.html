@@ -85,6 +85,18 @@
 									Myself
 								</a>
 							</li>
+							<li class="nav-item" >
+								<a class="nav-link" th:href="@{/com}">
+
+									My Community
+								</a>
+							</li>
+							<li class="nav-item" >
+								<a class="nav-link" th:href="@{/all}">
+
+									Community
+								</a>
+							</li>
 
 
 						</ul>
@@ -126,7 +138,7 @@
 
 									<td>
 										<a class="btn btn-sm btn-primary" th:href="@{/assign/}+${assignment.getId()}">查看</a>
-
+										<a class="btn btn-sm btn-success" th:href="@{/download/}+${assignment.getFid()}">下载附件</a>
 									</td>
 								</tr>
 							</tbody>
